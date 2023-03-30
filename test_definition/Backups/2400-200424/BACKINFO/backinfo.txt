@@ -1,0 +1,41 @@
+#
+# Generated backup file, do not edit.
+#
+# Originally at: C:\Users\user\Documents\RobotStudio\Solutions\Sa\Virtual Controllers\TEMP\1619136041\backup.360180
+# 2021-05-31  09:33:53
+#
+>>SYSTEM_ID:
+VIRTUAL_USE
+
+>>PRODUCTS_ID:
+RobotWare Version: 6.10.02.00
+
+  RobotWare Base
+  Korean
+  709-1 DeviceNet Master/Slave
+  687-1 Advanced Robot Motion
+  608-1 World Zones
+  613-1 Collision Detection
+  616-1 PC Interface
+  623-1 Multitasking
+  IRB 2400-16/1.5 Type B
+  Drive System IRB 2400
+
+>>HOME:
+All public files and directories
+
+>>SYSPAR:
+SYS.cfg
+PROC.cfg
+MMC.cfg
+EIO.cfg
+SIO.cfg
+MOC.cfg
+
+
+>>TASK1: (T_ROB1,test_definition,)
+SYSMOD\user.sys @ 
+PROGMOD\MainModule.mod @ 
+
+
+>>EOF:

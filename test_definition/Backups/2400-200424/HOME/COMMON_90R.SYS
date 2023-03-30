@@ -1,0 +1,48 @@
+MODULE COMMON_90R(SYSMODULE)
+  !***********************************************
+  !This module is for IRB2600. Active Tool is tPen_90.
+  !Author:Sang-Cheol Moon  !Revision:2019-12-15
+  !***********************************************
+  CONST jointtarget jpos10:=[[0,0,0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+  CONST jointtarget jpos20:=[[0,0,0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+  CONST robtarget pHome26:=[[800,0,850],[0,0,1,0],[-1,-1,0,1],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+  PERS pos pos1:=[800,0,850];
+  PERS loaddata load1:=[ 5,[0,0, 50],[1,0,0,0],0,0,0];
+  PERS loaddata load2:=[10,[0,0,100],[1,0,0,0],0,0,0];
+  PERS tooldata tPen_90:=[TRUE,[[100,0,100],[0.707107,0,0.707107,0]],[1.0,[3.431,0,56.08],[1,0,0,0],0,0,0]];
+  TASK PERS wobjdata wobj1:=[FALSE,TRUE,"",[[700,-480,570],[1,0,0,0]],[[0,0,0],[1,0,0,0]]];
+  TASK PERS wobjdata wobj2:=[FALSE,TRUE,"",[[694.824,300,569.319],[0.991445,0,-0.130527,0]],[[0,0,0],[1,0,0,0]]];
+  PERS bool bFlag1:=FALSE;
+  PERS num nMaxSpeed:=7000;
+  PERS string sVersion:="ROBOTWARE_6.10.0069";
+  PERS string sRobotType:="IRB 2600-20/1.65 Type B";
+  VAR shapedata shapeHome;
+  VAR wzstationary wzHome:=[0];
+  !***********************************************
+  PROC rCalibPos()
+    MoveAbsJ jpos10,v200,fine,tPen_90;
+    Stop;
+    MoveAbsJ jpos20,v200,fine,tPen_90;
+  ENDPROC
+
+  PROC rGoHome()
+    MoveJ pHome26,v500,fine,tPen_90;
+    pos1:=CPos(\Tool:=tPen_90\WObj:=wobj0);
+    !TPWrite "Robot is at Home position.";
+  ENDPROC
+
+  PROC rHomePos()
+    !WZSphDef\Inside,shapeHome,pos1,30;
+    !WZDOSet\Stat,wzHome\Inside,shapeHome,DO16_HomePos,1;
+  ENDPROC
+
+  PROC rGetSysInfo()
+    TPErase;
+    sVersion:=GetSysInfo(\SWVersion);
+    sRobotType:=GetSysInfo(\RobotType);
+    nMaxSpeed:=MaxRobSpeed();
+    TPWrite "RW Version    := "+sVersion;
+    TPWrite "Robot Type    := "+sRobotType;
+    TPWrite "Max. TCP Speed:= "+ValtoStr(nMaxSpeed)+" mm/sec";
+  ENDPROC
+ENDMODULE
